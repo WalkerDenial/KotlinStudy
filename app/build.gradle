@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    println("app --> build.gradle --> android")
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        println("app --> build.gradle --> defaultConfig")
+        applicationId "com.wd.kt.study"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        println("app --> build.gradle --> defaultConfig out")
+    }
+
+    buildTypes {
+        println("app --> build.gradle --> buildTypes")
+        debug {
+            println("app --> build.gradle --> debug")
+            println("app --> build.gradle --> debug out")
+        }
+        release {
+            println("app --> build.gradle --> release")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            println("app --> build.gradle --> release out")
+        }
+        println("app --> build.gradle --> buildTypes out")
+    }
+    compileOptions {
+        println("app --> build.gradle --> compileOptions")
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        println("app --> build.gradle --> compileOptions out")
+    }
+    kotlinOptions {
+        println("app --> build.gradle --> kotlinOptions")
+        jvmTarget = '1.8'
+        println("app --> build.gradle --> kotlinOptions out")
+    }
+    println("app --> build.gradle --> android out")
+}
+
+dependencies {
+    println("app --> build.gradle --> dependencies")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation deps.andX.core
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    println("app --> build.gradle --> dependencies out")
+}
