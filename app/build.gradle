@@ -61,16 +61,8 @@ android {
 dependencies {
     println("app --> build.gradle --> dependencies")
 
-    implementation deps.kt.core
-    implementation deps.andX.core
-    implementation deps.andX.appcompat
+    baseDeps(dependencies)
     implementation deps.google.material
-    implementation deps.andX.constraint
-    implementation deps.andX.livedata
-    implementation deps.andX.viewmodel
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.ext
-    androidTestImplementation deps.test.espresso
 
     println("app --> build.gradle --> dependencies out")
 }

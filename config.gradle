@@ -40,3 +40,17 @@ ext.deps = [
                 espresso: 'androidx.test.espresso:espresso-core:3.2.0'
         ]
 ]
+
+ext.baseDeps = { handler ->
+    handler.implementation deps.kt.core
+
+    handler.implementation deps.andX.core
+    handler.implementation deps.andX.appcompat
+    handler.implementation deps.andX.constraint
+    handler.implementation deps.andX.livedata
+    handler.implementation deps.andX.viewmodel
+
+    handler.testImplementation deps.test.junit
+    handler.androidTestImplementation deps.test.ext
+    handler.androidTestImplementation deps.test.espresso
+}
