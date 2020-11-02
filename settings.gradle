@@ -1,4 +1,6 @@
 println("settings.gradle --> start")
+
 include ':app'
 rootProject.name = "KotlinStudy"
+
 println("settings.gradle --> end")
