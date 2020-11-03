@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -8,24 +8,20 @@ android {
     buildToolsVersion ver.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.wd.kt.study"
         minSdkVersion ver.minSdkVersion
         targetSdkVersion ver.targetSdkVersion
         versionCode ver.versionCode
         versionName ver.versionName
 
-        testInstrumentationRunner deps.test.runner
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
-        debug {
-
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

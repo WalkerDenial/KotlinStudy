@@ -1,24 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-allprojects {
-    println("config.gradle --> allprojects")
+allprojects { repositories { maven { url local_host } } }
 
-    repositories {
-        println("config.gradle --> repositories")
+task clean(type: Delete) { delete rootProject.buildDir }
 
-        maven { url local_host }
+ext.ver = [
+        compileSdkVersion: 29,
+        buildToolsVersion: "29.0.3",
 
-        println("config.gradle --> repositories out")
-    }
-    println("config.gradle --> allprojects out")
-}
-
-task clean(type: Delete) {
-    println("config.gradle --> clean")
-
-    delete rootProject.buildDir
-
-    println("config.gradle --> clean out")
-}
+        minSdkVersion    : 21,
+        targetSdkVersion : 29,
+        versionCode      : 1,
+        versionName      : "1.0.0"
+]
 
 ext.deps = [
         kt    : [
@@ -37,7 +30,8 @@ ext.deps = [
         test  : [
                 junit   : 'junit:junit:4.12',
                 ext     : 'androidx.test.ext:junit:1.1.1',
-                espresso: 'androidx.test.espresso:espresso-core:3.2.0'
+                espresso: 'androidx.test.espresso:espresso-core:3.2.0',
+                runner  : 'androidx.test.runner.AndroidJUnitRunner'
         ]
 ]
 
@@ -49,6 +43,8 @@ ext.baseDeps = { handler ->
     handler.implementation deps.andX.constraint
     handler.implementation deps.andX.livedata
     handler.implementation deps.andX.viewmodel
+
+    handler.implementation deps.google.material
 
     handler.testImplementation deps.test.junit
     handler.androidTestImplementation deps.test.ext

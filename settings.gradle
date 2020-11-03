@@ -1,6 +1,3 @@
-println("settings.gradle --> start")
-
 include ':app'
+include ':coroutine'
 rootProject.name = "KotlinStudy"
-
-println("settings.gradle --> end")
