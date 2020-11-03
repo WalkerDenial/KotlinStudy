@@ -5,7 +5,7 @@ allprojects {
     repositories {
         println("config.gradle --> repositories")
 
-        maven { url 'http://localhost:8081/artifactory/android_group/' }
+        maven { url local_host }
 
         println("config.gradle --> repositories out")
     }
