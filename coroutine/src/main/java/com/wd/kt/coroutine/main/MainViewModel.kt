@@ -1,4 +1,4 @@
-package com.wd.kt.study.ui.main
+package com.wd.kt.coroutine.main
 
 import androidx.lifecycle.ViewModel
 

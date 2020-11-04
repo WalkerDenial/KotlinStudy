@@ -13,7 +13,7 @@ android {
         versionCode ver.versionCode
         versionName ver.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner deps.test.runner
         consumerProguardFiles "consumer-rules.pro"
     }
 
