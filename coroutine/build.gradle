@@ -15,6 +15,7 @@ android {
 
         testInstrumentationRunner deps.test.runner
         consumerProguardFiles "consumer-rules.pro"
+
     }
 
     buildTypes {
@@ -29,6 +30,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
     }
 }
 
