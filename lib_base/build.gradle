@@ -15,7 +15,6 @@ android {
 
         testInstrumentationRunner deps.test.runner
         consumerProguardFiles "consumer-rules.pro"
-
     }
 
     buildTypes {
