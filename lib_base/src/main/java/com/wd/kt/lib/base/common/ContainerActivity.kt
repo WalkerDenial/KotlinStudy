@@ -11,13 +11,14 @@ import com.wd.kt.lib.base.fragment.BaseFragment
  * @Email WalkerDenial@gmail.com
  * @Time Created at 2020/11/7 23:36.
  */
-open class ContainerActivity<F : BaseFragment>(private val fragment: F) :
-    BaseActivity(R.layout.container_activity) {
+abstract class ContainerActivity<F : BaseFragment> : BaseActivity(R.layout.container_activity) {
+
+    abstract fun getContentFragment(): F
 
     override fun initView(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, getContentFragment())
                 .commitNow()
         }
     }

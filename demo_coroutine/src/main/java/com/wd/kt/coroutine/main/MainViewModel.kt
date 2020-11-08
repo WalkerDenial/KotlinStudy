@@ -5,6 +5,6 @@ import com.wd.kt.lib.base.vm.BaseViewModel
 
 class MainViewModel : BaseViewModel() {
 
-    val msg = MutableLiveData<String>().apply { value = "Test" }
+    val msg = MutableLiveData<String>().apply { value = "This is test message." }
 
 }
