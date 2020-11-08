@@ -45,17 +45,23 @@ ext.deps = [
         ]
 ]
 
-ext.baseDeps = { handler ->
+ext.ktDeps = { handler ->
     handler.implementation deps.kt.core
+}
 
+ext.andXDeps = { handler ->
     handler.implementation deps.andX.core
     handler.implementation deps.andX.appcompat
     handler.implementation deps.andX.constraint
     handler.implementation deps.andX.livedata
     handler.implementation deps.andX.viewmodel
+}
 
+ext.googleDeps = { handler ->
     handler.implementation deps.google.material
+}
 
+ext.testDeps = { handler ->
     handler.testImplementation deps.test.junit
     handler.androidTestImplementation deps.test.ext
     handler.androidTestImplementation deps.test.espresso
@@ -64,4 +70,16 @@ ext.baseDeps = { handler ->
 ext.rxDeps = { handler ->
     handler.implementation deps.rx.android
     handler.implementation deps.rx.java
+}
+
+ext.libGroup = { handler ->
+    ktDeps(handler)
+    andXDeps(handler)
+    testDeps(handler)
+}
+
+ext.moduleGroup = { handler ->
+    libGroup(handler)
+    googleDeps(handler)
+    handler.implementation project(":lib_base")
 }

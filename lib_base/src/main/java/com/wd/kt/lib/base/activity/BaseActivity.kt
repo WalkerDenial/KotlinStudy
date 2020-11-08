@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
  */
 abstract class BaseActivity(@LayoutRes val layoutId: Int) : AppCompatActivity() {
 
-    abstract fun initView(savedInstanceState: Bundle?)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContentView()
@@ -26,6 +24,10 @@ abstract class BaseActivity(@LayoutRes val layoutId: Int) : AppCompatActivity() 
     }
 
     open fun initData(savedInstanceState: Bundle?) {
+
+    }
+
+    open fun initView(savedInstanceState: Bundle?) {
 
     }
 

@@ -42,6 +42,6 @@ android {
 }
 
 dependencies {
-    baseDeps(dependencies)
+    testDeps(dependencies)
     coroutineImplementation project(':demo_coroutine')
 }

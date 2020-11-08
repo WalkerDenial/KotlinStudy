@@ -10,10 +10,6 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
     MainViewModel::class.java
 ) {
 
-    override fun initView(savedInstanceState: Bundle?) {
-
-    }
-
     override fun onBindingConfig(viewModel: MainViewModel, binding: MainFragmentBinding) {
         binding.vm = viewModel
     }

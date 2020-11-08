@@ -17,9 +17,11 @@ abstract class BaseFragment(@LayoutRes protected val layoutId: Int) : Fragment()
 
     private lateinit var contentView: View
 
-    abstract fun initView(savedInstanceState: Bundle?)
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         contentView = getContentView(inflater, container)
         return contentView
     }
@@ -35,6 +37,10 @@ abstract class BaseFragment(@LayoutRes protected val layoutId: Int) : Fragment()
     }
 
     open fun initData(savedInstanceState: Bundle?) {
+
+    }
+
+    open fun initView(savedInstanceState: Bundle?) {
 
     }
 
