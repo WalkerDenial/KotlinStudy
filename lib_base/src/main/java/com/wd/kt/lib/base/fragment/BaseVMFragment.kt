@@ -22,7 +22,7 @@ abstract class BaseVMFragment<DB : ViewDataBinding, VM : BaseViewModel>(
 ) : BaseFragment(layoutId) {
 
     private lateinit var binding: DB
-    private lateinit var viewModel: VM
+    protected lateinit var viewModel: VM
 
     abstract fun onBindingConfig(viewModel: VM, binding: DB)
 
