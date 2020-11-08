@@ -1,18 +1,6 @@
 package com.wd.kt.coroutine
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.wd.kt.coroutine.main.MainFragment
+import com.wd.kt.lib.base.common.ContainerActivity
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
-        }
-    }
-}
+class MainActivity : ContainerActivity<MainFragment>(MainFragment())

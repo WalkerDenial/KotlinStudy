@@ -1,5 +1,6 @@
 package com.wd.kt.lib.base.activity
 
+import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -25,7 +26,10 @@ abstract class BaseVMActivity<DB : ViewDataBinding, VM : BaseViewModel>(
     override fun initContentView() {
         binding = DataBindingUtil.setContentView(this, layoutId)
         viewModel = ViewModelProvider(this).get(clazz)
-        binding.lifecycleOwner = this
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        super.initData(savedInstanceState)
         onBindingConfig(viewModel, binding)
     }
 

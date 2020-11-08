@@ -19,23 +19,19 @@ abstract class BaseFragment(@LayoutRes protected val layoutId: Int) : Fragment()
 
     abstract fun initView(savedInstanceState: Bundle?)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initData(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         contentView = getContentView(inflater, container)
-        initView(savedInstanceState)
         return contentView
     }
 
     open fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
         return inflater.inflate(layoutId, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initData(savedInstanceState)
+        initView(savedInstanceState)
     }
 
     open fun initData(savedInstanceState: Bundle?) {

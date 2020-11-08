@@ -15,7 +15,6 @@ android {
 
         testInstrumentationRunner deps.test.runner
         consumerProguardFiles "consumer-rules.pro"
-
     }
 
     buildTypes {
@@ -39,4 +38,5 @@ android {
 dependencies {
     baseDeps(dependencies)
     rxDeps(dependencies)
+    implementation project(":lib_base")
 }

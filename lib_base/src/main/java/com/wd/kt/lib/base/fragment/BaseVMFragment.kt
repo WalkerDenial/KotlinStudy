@@ -1,5 +1,6 @@
 package com.wd.kt.lib.base.fragment
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +29,12 @@ abstract class BaseVMFragment<DB : ViewDataBinding, VM : BaseViewModel>(
     override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewModel = ViewModelProvider(this).get(clazz)
-        binding.lifecycleOwner = this
-        onBindingConfig(viewModel, binding)
         return binding.root
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        super.initData(savedInstanceState)
+        onBindingConfig(viewModel, binding)
     }
 
 }

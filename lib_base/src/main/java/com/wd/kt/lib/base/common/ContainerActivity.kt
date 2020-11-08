@@ -11,7 +11,7 @@ import com.wd.kt.lib.base.fragment.BaseFragment
  * @Email WalkerDenial@gmail.com
  * @Time Created at 2020/11/7 23:36.
  */
-class ContainerActivity<F : BaseFragment>(private val fragment: F) :
+open class ContainerActivity<F : BaseFragment>(private val fragment: F) :
     BaseActivity(R.layout.container_activity) {
 
     override fun initView(savedInstanceState: Bundle?) {
