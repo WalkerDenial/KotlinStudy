@@ -12,6 +12,7 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
 
     override fun onBindingConfig(viewModel: MainViewModel, binding: MainFragmentBinding) {
         binding.vm = viewModel
+        viewModel.msg.observe(this, { binding.invalidateAll() })
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -33,6 +34,9 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
 
         // 协程写法
         viewModel.coroutineTest()
+
+        // 获取网络数据
+        viewModel.queryBanner()
     }
 
 }

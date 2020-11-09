@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wd.kt.lib.base.vm.BaseViewModel
+import com.wd.kt.net.RetrofitHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ import kotlin.concurrent.thread
 
 class MainViewModel : BaseViewModel() {
 
-    val msg = MutableLiveData<String>().apply { value = "Coroutine Test" }
+    val msg = MutableLiveData<String>()
 
     /**
      * 1. 使用 GlobalScope 作用域
@@ -70,6 +71,13 @@ class MainViewModel : BaseViewModel() {
             uiTest2()
             networkTests3()
             uiTest3()
+        }
+    }
+
+    fun queryBanner() {
+        viewModelScope.launch(Dispatchers.Main) {
+            val banner = RetrofitHelper.wanAPI.getBanner()
+            msg.value = banner.data[0].title
         }
     }
 
