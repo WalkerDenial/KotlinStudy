@@ -6,10 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wd.kt.lib.base.vm.BaseViewModel
 import com.wd.kt.net.RetrofitHelper
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.*
 import kotlin.concurrent.thread
 
 class MainViewModel : BaseViewModel() {
@@ -74,11 +73,20 @@ class MainViewModel : BaseViewModel() {
         }
     }
 
-    fun queryBanner() {
+    fun coroutineCompose() {
         viewModelScope.launch(Dispatchers.Main) {
-            val banner = RetrofitHelper.wanAPI.getBanner()
-            msg.value = banner.data[0].title
+            val banner = async { RetrofitHelper.wanAPI.queryBannerKt().data }
+            val chapter = async { RetrofitHelper.wanAPI.queryChapterKt().data }
+            msg.value = "${banner.await()?.first()?.title} + ${chapter.await()?.first()?.name}"
         }
+    }
+
+    fun rxJavaCompose() {
+        Single.zip(
+            RetrofitHelper.wanAPI.queryBannerRx(),
+            RetrofitHelper.wanAPI.queryChapterRx(),
+            { banner, chapter -> msg.postValue("${banner.data?.first()?.title} - ${chapter.data?.first()?.name}") }
+        ).observeOn(AndroidSchedulers.mainThread()).subscribe()
     }
 
     private fun uiTest1() {

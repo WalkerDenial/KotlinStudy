@@ -1,6 +1,9 @@
 package com.wd.kt.net
 
-import com.wd.kt.model.BannerModel
+import com.wd.kt.model.BannerItemModel
+import com.wd.kt.model.BaseModel
+import com.wd.kt.model.ChapterItemModel
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 
 /**
@@ -12,6 +15,15 @@ import retrofit2.http.GET
 interface WanAPI {
 
     @GET("banner/json")
-    suspend fun getBanner(): BannerModel
+    suspend fun queryBannerKt(): BaseModel<List<BannerItemModel>>
+
+    @GET("wxarticle/chapters/json")
+    suspend fun queryChapterKt(): BaseModel<List<ChapterItemModel>>
+
+    @GET("banner/json")
+    fun queryBannerRx(): Single<BaseModel<List<BannerItemModel>>>
+
+    @GET("wxarticle/chapters/json")
+    fun queryChapterRx(): Single<BaseModel<List<ChapterItemModel>>>
 
 }

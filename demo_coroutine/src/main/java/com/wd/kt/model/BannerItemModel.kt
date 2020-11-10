@@ -6,13 +6,7 @@ package com.wd.kt.model
  * @Email WalkerDenial@gmail.com
  * @Time Created at 2020/11/9 23:22.
  */
-data class BannerModel(
-    val data: List<Data>,
-    val errorCode: Int,
-    val errorMsg: String
-)
-
-data class Data(
+data class BannerItemModel(
     val desc: String,
     val id: Int,
     val imagePath: String,

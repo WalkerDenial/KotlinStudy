@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    rxDeps(dependencies)
     moduleGroup(dependencies)
     retrofitDeps(dependencies)
 }
