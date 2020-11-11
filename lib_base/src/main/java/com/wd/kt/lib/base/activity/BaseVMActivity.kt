@@ -26,6 +26,7 @@ abstract class BaseVMActivity<DB : ViewDataBinding, VM : BaseViewModel>(
     override fun initContentView() {
         binding = DataBindingUtil.setContentView(this, layoutId)
         viewModel = ViewModelProvider(this).get(clazz)
+        binding.lifecycleOwner = this
     }
 
     override fun initData(savedInstanceState: Bundle?) {

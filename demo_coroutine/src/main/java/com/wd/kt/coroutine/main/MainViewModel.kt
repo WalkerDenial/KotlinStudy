@@ -64,11 +64,11 @@ class MainViewModel : BaseViewModel() {
      */
     fun coroutineTest() {
         viewModelScope.launch(Dispatchers.Main) {
-            networkTests1()
+            networkTestKt1()
             uiTest1()
-            networkTests2()
+            networkTestKt2()
             uiTest2()
-            networkTests3()
+            networkTestKt3()
             uiTest3()
         }
     }
@@ -113,16 +113,16 @@ class MainViewModel : BaseViewModel() {
         printThreadInfo("networkTest3()")
     }
 
-    private suspend fun networkTests1() = withContext(Dispatchers.IO) {
-        printThreadInfo("networkTest1()")
+    private suspend fun networkTestKt1() = withContext(Dispatchers.IO) {
+        printThreadInfo("networkTestKt1()")
     }
 
-    private suspend fun networkTests2() = withContext(Dispatchers.IO) {
-        printThreadInfo("networkTest2()")
+    private suspend fun networkTestKt2() = withContext(Dispatchers.IO) {
+        printThreadInfo("networkTestKt2()")
     }
 
-    private suspend fun networkTests3() = withContext(Dispatchers.IO) {
-        printThreadInfo("networkTest3()")
+    private suspend fun networkTestKt3() = withContext(Dispatchers.IO) {
+        printThreadInfo("networkTestKt3()")
     }
 
     private fun printThreadInfo(prefix: String = "") {

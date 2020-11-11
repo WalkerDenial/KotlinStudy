@@ -29,6 +29,7 @@ abstract class BaseVMFragment<DB : ViewDataBinding, VM : BaseViewModel>(
     override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewModel = ViewModelProvider(this).get(clazz)
+        binding.lifecycleOwner = this
         return binding.root
     }
 
