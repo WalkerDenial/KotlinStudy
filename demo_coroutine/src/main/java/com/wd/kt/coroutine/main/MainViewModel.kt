@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.wd.kt.lib.base.vm.BaseViewModel
 import com.wd.kt.net.RetrofitHelper
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import kotlin.concurrent.thread
 
@@ -40,11 +42,11 @@ class MainViewModel : BaseViewModel() {
                 uiTest1()
                 thread {
                     networkTest2()
-                    activity?.runOnUiThread {
+                    activity.runOnUiThread {
                         uiTest2()
                         thread {
                             networkTest3()
-                            activity?.runOnUiThread {
+                            activity.runOnUiThread {
                                 uiTest3()
                             }
                         }
@@ -73,6 +75,33 @@ class MainViewModel : BaseViewModel() {
         }
     }
 
+    /**
+     * 模拟网络请求以及更新 UI
+     * 1. 请求接口 1 --> 更新 UI 1
+     * 2. 请求接口 2 --> 更新 UI 2
+     * 3. 请求接口 3 --> 更新 UI 3
+     *
+     * RxJava 写法
+     */
+    fun rxJavaTest() {
+        networkTestRx1()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                uiTest1()
+                networkTestRx2()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap {
+                uiTest2()
+                networkTestRx3()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { uiTest3() }
+    }
+
     fun coroutineCompose() {
         viewModelScope.launch(Dispatchers.Main) {
             val banner = async { RetrofitHelper.wanAPI.queryBannerKt().data }
@@ -85,8 +114,8 @@ class MainViewModel : BaseViewModel() {
         Single.zip(
             RetrofitHelper.wanAPI.queryBannerRx(),
             RetrofitHelper.wanAPI.queryChapterRx(),
-            { banner, chapter -> msg.postValue("${banner.data?.first()?.title} - ${chapter.data?.first()?.name}") }
-        ).observeOn(AndroidSchedulers.mainThread()).subscribe()
+            { banner, chapter -> "${banner.data?.first()?.title} - ${chapter.data?.first()?.name}" }
+        ).observeOn(AndroidSchedulers.mainThread()).subscribe { combine -> msg.value = combine }
     }
 
     private fun uiTest1() {
@@ -123,6 +152,27 @@ class MainViewModel : BaseViewModel() {
 
     private suspend fun networkTestKt3() = withContext(Dispatchers.IO) {
         printThreadInfo("networkTestKt3()")
+    }
+
+    private fun networkTestRx1(): Observable<List<String>> {
+        return Observable.create {
+            printThreadInfo("networkTestRx1()")
+            arrayListOf("networkTestRx1")
+        }
+    }
+
+    private fun networkTestRx2(): Observable<String> {
+        return Observable.create {
+            printThreadInfo("networkTestRx2()")
+            arrayListOf("networkTestRx2")
+        }
+    }
+
+    private fun networkTestRx3(): Observable<String> {
+        return Observable.create {
+            printThreadInfo("networkTestRx3()")
+            arrayListOf("networkTestRx3")
+        }
     }
 
     private fun printThreadInfo(prefix: String = "") {

@@ -21,7 +21,7 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
 
     private fun coroutineTest() {
         // 使用 GlobalScope 作用域，通过 launch 开启一段协程
-        viewModel.globalCoroutineTest()
+//        viewModel.globalCoroutineTest()
 
         // 模拟网络请求以及更新 UI
         // 1. 请求接口 1 --> 更新 UI 1
@@ -29,13 +29,16 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
         // 3. 请求接口 3 --> 更新 UI 3
 
         // 线程写法
-        viewModel.threadTest(activity)
+//        viewModel.threadTest(activity)
 
         // 协程写法
-        viewModel.coroutineTest()
+//        viewModel.coroutineTest()
+
+        // RxJava 写法
+        viewModel.rxJavaTest()
 
         // 获取网络数据
-        viewModel.rxJavaCompose()
+//        viewModel.rxJavaCompose()
         // viewModel.coroutineCompose()
     }
 
