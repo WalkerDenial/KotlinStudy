@@ -84,22 +84,20 @@ class MainViewModel : BaseViewModel() {
      * RxJava 写法
      */
     fun rxJavaTest() {
-        networkTestRx1()
-            .subscribeOn(Schedulers.io())
+        Observable.just("Test")
+            .observeOn(Schedulers.io())
+            .doOnNext { networkTestRx1() }
             .observeOn(AndroidSchedulers.mainThread())
-            .flatMap {
-                uiTest1()
-                networkTestRx2()
-            }
-            .subscribeOn(Schedulers.io())
+            .doOnNext { uiTest1() }
+            .observeOn(Schedulers.io())
+            .doOnNext { networkTestRx2() }
             .observeOn(AndroidSchedulers.mainThread())
-            .flatMap {
-                uiTest2()
-                networkTestRx3()
-            }
-            .subscribeOn(Schedulers.io())
+            .doOnNext { uiTest2() }
+            .observeOn(Schedulers.io())
+            .doOnNext { networkTestRx3() }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { uiTest3() }
+            .doOnNext { uiTest3() }
+            .subscribe()
     }
 
     fun coroutineCompose() {
@@ -154,25 +152,16 @@ class MainViewModel : BaseViewModel() {
         printThreadInfo("networkTestKt3()")
     }
 
-    private fun networkTestRx1(): Observable<List<String>> {
-        return Observable.create {
-            printThreadInfo("networkTestRx1()")
-            arrayListOf("networkTestRx1")
-        }
+    private fun networkTestRx1() {
+        printThreadInfo("networkTestRx1()")
     }
 
-    private fun networkTestRx2(): Observable<String> {
-        return Observable.create {
-            printThreadInfo("networkTestRx2()")
-            arrayListOf("networkTestRx2")
-        }
+    private fun networkTestRx2() {
+        printThreadInfo("networkTestRx2()")
     }
 
-    private fun networkTestRx3(): Observable<String> {
-        return Observable.create {
-            printThreadInfo("networkTestRx3()")
-            arrayListOf("networkTestRx3")
-        }
+    private fun networkTestRx3() {
+        printThreadInfo("networkTestRx3()")
     }
 
     private fun printThreadInfo(prefix: String = "") {
