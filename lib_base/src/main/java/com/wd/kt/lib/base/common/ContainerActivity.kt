@@ -15,6 +15,9 @@ abstract class ContainerActivity<F : BaseFragment> : BaseActivity(R.layout.conta
 
     abstract fun getContentFragment(): F
 
+    /**
+     * 将获取到的 fragment 添加到界面上
+     */
     override fun initView(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

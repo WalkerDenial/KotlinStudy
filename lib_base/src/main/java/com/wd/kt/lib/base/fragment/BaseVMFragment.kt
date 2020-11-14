@@ -21,11 +21,17 @@ abstract class BaseVMFragment<DB : ViewDataBinding, VM : BaseViewModel>(
     private val clazz: Class<VM>
 ) : BaseFragment(layoutId) {
 
+    /**
+     * DataBinding 信息，严格来讲，除了绑定，子类不能对此对象进行操作
+     */
     private lateinit var binding: DB
     protected lateinit var viewModel: VM
 
     abstract fun onBindingConfig(viewModel: VM, binding: DB)
 
+    /**
+     * 获取 ViewDataBinding 对象以及 viewModel
+     */
     override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewModel = ViewModelProvider(this).get(clazz)
@@ -33,6 +39,9 @@ abstract class BaseVMFragment<DB : ViewDataBinding, VM : BaseViewModel>(
         return binding.root
     }
 
+    /**
+     * 初始化数据时，将 viewModel 与 binding 绑定处理；
+     */
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         onBindingConfig(viewModel, binding)

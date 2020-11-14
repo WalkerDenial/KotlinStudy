@@ -28,14 +28,14 @@ class MainViewModel : BaseViewModel() {
     }
 
     /**
-     * 模拟网络请求以及更新 UI
+     * 模拟串行网络请求以及更新 UI
      * 1. 请求接口 1 --> 更新 UI 1
      * 2. 请求接口 2 --> 更新 UI 2
      * 3. 请求接口 3 --> 更新 UI 3
      *
      * 线程写法
      */
-    fun <A : ComponentActivity> threadTest(activity: A?) {
+    fun <A : ComponentActivity> threadSerialTest(activity: A?) {
         thread {
             networkTest1()
             activity?.runOnUiThread {
@@ -57,14 +57,14 @@ class MainViewModel : BaseViewModel() {
     }
 
     /**
-     * 模拟网络请求以及更新 UI
+     * 模拟串行网络请求以及更新 UI
      * 1. 请求接口 1 --> 更新 UI 1
      * 2. 请求接口 2 --> 更新 UI 2
      * 3. 请求接口 3 --> 更新 UI 3
      *
      * 协程写法
      */
-    fun coroutineTest() {
+    fun coroutineSerialTest() {
         viewModelScope.launch(Dispatchers.Main) {
             networkTestKt1()
             uiTest1()
@@ -76,31 +76,52 @@ class MainViewModel : BaseViewModel() {
     }
 
     /**
-     * 模拟网络请求以及更新 UI
+     * 模拟串行网络请求以及更新 UI
      * 1. 请求接口 1 --> 更新 UI 1
      * 2. 请求接口 2 --> 更新 UI 2
      * 3. 请求接口 3 --> 更新 UI 3
      *
      * RxJava 写法
      */
-    fun rxJavaTest() {
+    fun rxJavaSerialTest() {
         Observable.just("Test")
             .observeOn(Schedulers.io())
-            .doOnNext { networkTestRx1() }
+            .doOnNext { networkTest1() }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { uiTest1() }
             .observeOn(Schedulers.io())
-            .doOnNext { networkTestRx2() }
+            .doOnNext { networkTest2() }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { uiTest2() }
             .observeOn(Schedulers.io())
-            .doOnNext { networkTestRx3() }
+            .doOnNext { networkTest3() }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnNext { uiTest3() }
             .subscribe()
     }
 
-    fun coroutineCompose() {
+    /**
+     * 线程并行网络请求
+     */
+    fun <A : ComponentActivity> threadParallelTest(activity: A?) {
+        thread {
+            networkTest1()
+            activity?.runOnUiThread { uiTest1() }
+        }
+        thread {
+            networkTest2()
+            activity?.runOnUiThread { uiTest2() }
+        }
+        thread {
+            networkTest3()
+            activity?.runOnUiThread { uiTest3() }
+        }
+    }
+
+    /**
+     * 协程并行网络请求
+     */
+    fun coroutineParallelTest() {
         viewModelScope.launch(Dispatchers.Main) {
             val banner = async { RetrofitHelper.wanAPI.queryBannerKt().data }
             val chapter = async { RetrofitHelper.wanAPI.queryChapterKt().data }
@@ -108,7 +129,10 @@ class MainViewModel : BaseViewModel() {
         }
     }
 
-    fun rxJavaCompose() {
+    /**
+     * RxJava 网络并行请求
+     */
+    fun rxJavaParallelTest() {
         Single.zip(
             RetrofitHelper.wanAPI.queryBannerRx(),
             RetrofitHelper.wanAPI.queryChapterRx(),
@@ -150,18 +174,6 @@ class MainViewModel : BaseViewModel() {
 
     private suspend fun networkTestKt3() = withContext(Dispatchers.IO) {
         printThreadInfo("networkTestKt3()")
-    }
-
-    private fun networkTestRx1() {
-        printThreadInfo("networkTestRx1()")
-    }
-
-    private fun networkTestRx2() {
-        printThreadInfo("networkTestRx2()")
-    }
-
-    private fun networkTestRx3() {
-        printThreadInfo("networkTestRx3()")
     }
 
     private fun printThreadInfo(prefix: String = "") {

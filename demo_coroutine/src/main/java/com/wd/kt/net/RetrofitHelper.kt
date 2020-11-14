@@ -21,6 +21,6 @@ object RetrofitHelper {
             .build()
     }
 
-    val wanAPI = retrofit.create(WanAPI::class.java)
+    val wanAPI: WanAPI = retrofit.create(WanAPI::class.java)
 
 }
