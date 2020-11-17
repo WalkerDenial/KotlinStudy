@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -8,19 +8,16 @@ android {
     buildToolsVersion ver.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.wd.kt.study"
         minSdkVersion ver.minSdkVersion
         targetSdkVersion ver.targetSdkVersion
         versionCode ver.versionCode
         versionName ver.versionName
 
         testInstrumentationRunner deps.test.runner
-
-        flavorDimensions "versionCode"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
-        debug {}
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -36,14 +33,8 @@ android {
     buildFeatures {
         dataBinding true
     }
-    productFlavors {
-        coroutine {}
-        generic {}
-    }
 }
 
 dependencies {
-    testDeps(dependencies)
-    coroutineImplementation project(':demo_coroutine')
-    genericImplementation project(':demo_generic')
+    moduleGroup(dependencies)
 }

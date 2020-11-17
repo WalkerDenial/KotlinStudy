@@ -3,5 +3,6 @@ rootProject.name = "KotlinStudy"
 include ':app'
 
 include ':demo_coroutine'
+include ':demo_generic'
 
 include ':lib_base'

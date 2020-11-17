@@ -40,13 +40,13 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
         // 获取网络数据
 
         // 线程写法
-        viewModel.threadParallelTest(activity)
+        // viewModel.threadParallelTest(activity)
 
         // RxJava 写法
         // viewModel.rxJavaParallelTest()
 
         // 协程写法
-        // viewModel.coroutineParallelTest()
+        viewModel.coroutineParallelTest()
     }
 
 }
