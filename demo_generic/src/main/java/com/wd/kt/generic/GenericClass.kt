@@ -6,5 +6,4 @@ package com.wd.kt.generic
  * @Email WalkerDenial@gmail.com
  * @Time Created at 2020/11/19 23:50.
  */
-open class GenericClass<T> {
-}
+open class GenericClass<T>
