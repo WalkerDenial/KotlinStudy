@@ -21,14 +21,23 @@ abstract class BaseVMActivity<DB : ViewDataBinding, VM : BaseViewModel>(
     private lateinit var binding: DB
     private lateinit var viewModel: VM
 
+    /**
+     * 配置 binding 信息
+     */
     abstract fun onBindingConfig(viewModel: VM, binding: DB)
 
+    /**
+     * 设置 contentView
+     */
     override fun initContentView() {
         binding = DataBindingUtil.setContentView(this, layoutId)
         viewModel = ViewModelProvider(this).get(clazz)
         binding.lifecycleOwner = this
     }
 
+    /**
+     * binding 做初始化操作
+     */
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         onBindingConfig(viewModel, binding)

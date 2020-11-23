@@ -13,17 +13,20 @@ import com.wd.kt.lib.base.fragment.BaseFragment
  */
 abstract class ContainerActivity<F : BaseFragment> : BaseActivity(R.layout.container_activity) {
 
+    /**
+     * 获取待展示的 Fragment
+     */
     abstract fun getContentFragment(): F
 
     /**
      * 将获取到的 fragment 添加到界面上
      */
     override fun initView(savedInstanceState: Bundle?) {
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, getContentFragment())
-                .commitNow()
-        }
+        if (savedInstanceState != null) return
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, getContentFragment())
+            .commitNow()
     }
 
 }

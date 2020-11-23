@@ -15,6 +15,9 @@ import kotlin.concurrent.thread
 
 class MainViewModel : BaseViewModel() {
 
+    /**
+     * 界面展示数据
+     */
     val msg = MutableLiveData<String>()
 
     /**
@@ -140,42 +143,72 @@ class MainViewModel : BaseViewModel() {
         ).observeOn(AndroidSchedulers.mainThread()).subscribe { combine -> msg.value = combine }
     }
 
+    /**
+     * 模拟 UI 线程操作，需要在主线程处理
+     */
     private fun uiTest1() {
         printThreadInfo("uiTest1()")
     }
 
+    /**
+     * 模拟 UI 线程操作，需要在主线程处理
+     */
     private fun uiTest2() {
         printThreadInfo("uiTest2()")
     }
 
+    /**
+     * 模拟 UI 线程操作，需要在主线程处理
+     */
     private fun uiTest3() {
         printThreadInfo("uiTest3()")
     }
 
+    /**
+     * 模拟网络请求，需要异步
+     */
     private fun networkTest1() {
         printThreadInfo("networkTest1()")
     }
 
+    /**
+     * 模拟网络请求，需要异步
+     */
     private fun networkTest2() {
         printThreadInfo("networkTest2()")
     }
 
+    /**
+     * 模拟网络请求，需要异步
+     */
     private fun networkTest3() {
         printThreadInfo("networkTest3()")
     }
 
+    /**
+     * 模拟网络请求，需要异步，kotlin coroutine 写法
+     */
     private suspend fun networkTestKt1() = withContext(Dispatchers.IO) {
         printThreadInfo("networkTestKt1()")
     }
 
+    /**
+     * 模拟网络请求，需要异步，kotlin coroutine 写法
+     */
     private suspend fun networkTestKt2() = withContext(Dispatchers.IO) {
         printThreadInfo("networkTestKt2()")
     }
 
+    /**
+     * 模拟网络请求，需要异步，kotlin coroutine 写法
+     */
     private suspend fun networkTestKt3() = withContext(Dispatchers.IO) {
         printThreadInfo("networkTestKt3()")
     }
 
+    /**
+     * 输出线程信息
+     */
     private fun printThreadInfo(prefix: String = "") {
         Log.i(
             "CoroutineDemo",

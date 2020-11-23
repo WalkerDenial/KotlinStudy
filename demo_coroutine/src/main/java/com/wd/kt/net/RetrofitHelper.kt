@@ -12,8 +12,14 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object RetrofitHelper {
 
+    /**
+     * 从 wanandroid 公开 API 获取信息
+     */
     private const val HOST = "https://www.wanandroid.com/"
 
+    /**
+     * 懒加载的方式获取 retrofit 实例
+     */
     private val retrofit by lazy {
         Retrofit.Builder().baseUrl(HOST)
             .addConverterFactory(GsonConverterFactory.create())
