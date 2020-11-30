@@ -1,8 +1,7 @@
-package com.wd.kt.coroutine.main
+package com.wd.kt.annotation.main
 
-import android.os.Bundle
-import com.wd.kt.coroutine.R
-import com.wd.kt.coroutine.databinding.MainFragmentBinding
+import com.wd.kt.annotation.R
+import com.wd.kt.annotation.databinding.MainFragmentBinding
 import com.wd.kt.lib.base.fragment.BaseVMFragment
 
 class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
@@ -12,41 +11,6 @@ class MainFragment : BaseVMFragment<MainFragmentBinding, MainViewModel>(
 
     override fun onBindingConfig(viewModel: MainViewModel, binding: MainFragmentBinding) {
         binding.vm = viewModel
-    }
-
-    override fun initData(savedInstanceState: Bundle?) {
-        super.initData(savedInstanceState)
-        coroutineTest()
-    }
-
-    private fun coroutineTest() {
-        // 使用 GlobalScope 作用域，通过 launch 开启一段协程
-        viewModel.globalCoroutineTest()
-
-        // 模拟网络请求以及更新 UI
-        // 1. 请求接口 1 --> 更新 UI 1
-        // 2. 请求接口 2 --> 更新 UI 2
-        // 3. 请求接口 3 --> 更新 UI 3
-
-        // 线程写法
-        viewModel.threadSerialTest(activity)
-
-        // 协程写法
-        viewModel.coroutineSerialTest()
-
-        // RxJava 写法
-        viewModel.rxJavaSerialTest()
-
-        // 获取网络数据
-
-        // 线程写法
-        // viewModel.threadParallelTest(activity)
-
-        // RxJava 写法
-        // viewModel.rxJavaParallelTest()
-
-        // 协程写法
-        viewModel.coroutineParallelTest()
     }
 
 }

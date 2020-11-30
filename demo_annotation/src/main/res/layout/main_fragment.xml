@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="com.wd.kt.generic.main.MainViewModel" />
+            type="com.wd.kt.annotation.main.MainViewModel" />
 
     </data>
 

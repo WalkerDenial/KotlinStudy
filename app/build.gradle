@@ -39,6 +39,7 @@ android {
     productFlavors {
         coroutine {}
         generic {}
+        annotation {}
     }
 }
 
@@ -46,4 +47,5 @@ dependencies {
     testDeps(dependencies)
     coroutineImplementation project(':demo_coroutine')
     genericImplementation project(':demo_generic')
+    annotationImplementation project(':demo_annotation')
 }
