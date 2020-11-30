@@ -1,9 +1,9 @@
-include ':demo_annotation'
 rootProject.name = "KotlinStudy"
 
 include ':app'
 
 include ':demo_coroutine'
 include ':demo_generic'
+include ':demo_annotation'
 
 include ':lib_base'
