@@ -28,12 +28,16 @@ class ReflectTest {
         val clazz = Class.forName(Fruit::class.java.canonicalName)
         val methods = clazz.declaredMethods.orEmpty()
         for (item in methods) {
-            println("Method: ${item.name}") // 打印 Fruit 中所有的方法名称
+            println(
+                "Method: ${item.name}, " +
+                        "parameterCount: ${item.parameterCount}, " +
+                        "returnType: ${item.returnType}"
+            ) // 打印 Fruit 中所有的方法名称
         }
 
         val fields = clazz.declaredFields.orEmpty()
         for (item in fields) {
-            println("Field: ${item.name}") // 打印 Fruit 中所有的属性
+            println("Field: ${item.name}, ${item.type}") // 打印 Fruit 中所有的属性
         }
     }
 
