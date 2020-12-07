@@ -1,4 +1,4 @@
-package com.wd.polymorphism
+package com.wd.kt.generic.polymorphism
 
 fun main() {
     val a1: A = A()
