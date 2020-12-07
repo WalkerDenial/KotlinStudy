@@ -108,4 +108,11 @@ class GenericMethod {
 //
 //    }
 
+    /**
+     * Array 测试
+     */
+    fun arrayTest() {
+        // val temp = Array<String>()
+    }
+
 }
