@@ -1,6 +1,14 @@
 package com.wd.kt.generic;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
 public class GenericTest {
+
+    public Map<String, Number> map = new HashMap<>();
 
     public <T> void test() {
         // 原始类型
@@ -20,6 +28,17 @@ public class GenericTest {
         // signature Lcom/wd/generic/TestBox<-TT;>;
         // declaration: box6 extends com.wd.generic.TestBox<? super T>
         TestBox<? super T> box6 = new TestBox<>();
+    }
+
+    public void parameterizedTypeTest() throws NoSuchFieldException {
+        Field field = GenericTest.class.getDeclaredField("map"); // 获取 field
+        ParameterizedType paramType = (ParameterizedType) field.getGenericType(); // 获取 ParameterizedType，ParameterizedType 中存储的有泛型信息
+        for (Type item : paramType.getActualTypeArguments()) { // 获取实际泛型信息，并打印
+            System.out.println(item.getTypeName());
+            // 打印结果为：
+            // java.lang.String
+            // java.lang.Number
+        }
     }
 
 }
