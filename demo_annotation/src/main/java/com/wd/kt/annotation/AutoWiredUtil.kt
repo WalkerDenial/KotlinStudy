@@ -1,6 +1,8 @@
 package com.wd.kt.annotation
 
 import android.app.Activity
+import android.content.Context
+import androidx.fragment.app.Fragment
 
 /**
  *
@@ -10,8 +12,15 @@ import android.app.Activity
  */
 object AutoWiredUtil {
 
-    fun <T : Activity> inject(context: T) {
-        // TODO: 12/10/20  
+    fun inject(context: Fragment) {
+        val fields = context.javaClass.declaredFields
+        if (fields.isNullOrEmpty()) return
+        for (item in fields) {
+            val temp = item.annotations
+            if (!item.isAnnotationPresent(AutoWired::class.java)) continue
+            var key = item.getAnnotation(AutoWired::class.java).value
+            if(key.isNullOrEmpty()) key = item.name
+        }
     }
 
 }

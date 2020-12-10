@@ -18,7 +18,9 @@ class SecondFragment : BaseVMFragment<SecondFragmentBinding, SecondViewModel>(
 
     override fun onBindingConfig(viewModel: SecondViewModel, binding: SecondFragmentBinding) {
         binding.vm = viewModel
-        activity?.let { AutoWiredUtil.inject(it) }
+        AutoWiredUtil.inject(this)
+        viewModel.name.postValue(name)
+        viewModel.age.postValue(age)
     }
 
 }

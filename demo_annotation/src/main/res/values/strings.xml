@@ -2,4 +2,5 @@
 <resources>
     <string name="prefixName">name: </string>
     <string name="prefixAge">age: </string>
+    <string name="switchPage">跳转界面</string>
 </resources>
