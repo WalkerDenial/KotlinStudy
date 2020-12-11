@@ -7,5 +7,5 @@ package com.wd.kt.annotation
  * @Time Created at 12/10/20 11:42 PM.
  */
 @Target(AnnotationTarget.FIELD)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class AutoWired(val value: String = "")
