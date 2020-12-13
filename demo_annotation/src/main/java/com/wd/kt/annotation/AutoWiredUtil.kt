@@ -11,6 +11,9 @@ import java.lang.reflect.Field
  */
 object AutoWiredUtil {
 
+    /**
+     * 通过反射获取到 Fragment 中的所有属性
+     */
     fun inject(fragment: Fragment) {
         val fields = fragment.javaClass.declaredFields
         if (fields.isNullOrEmpty()) return
@@ -22,6 +25,9 @@ object AutoWiredUtil {
         }
     }
 
+    /**
+     * 获取 intent 中数据并注入到反射到的属性当中
+     */
     private fun <T : Fragment> Field.invokeValue(fragment: T, key: String) {
         val intent = fragment.requireActivity().intent ?: return
         val value = when (this.type) {
