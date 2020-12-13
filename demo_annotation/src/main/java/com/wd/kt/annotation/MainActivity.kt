@@ -12,6 +12,7 @@ class MainActivity : ContainerActivity<MainFragment>() {
     fun onClick(view: View) {
         val intent = Intent(this, SecondActivity::class.java)
         intent.putExtra("name", "Wang")
+        intent.putExtra("nick_name", "Walker")
         intent.putExtra("age", 99)
         startActivity(intent)
     }
