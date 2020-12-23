@@ -1,7 +1,6 @@
 package com.wd.kt.generic.main
 
-import com.wd.kt.generic.main.MainFragment
-import com.wd.kt.lib.base.common.ContainerActivity
+import com.wd.kt.lib.base.activity.ContainerActivity
 
 class MainActivity : ContainerActivity<MainFragment>() {
 

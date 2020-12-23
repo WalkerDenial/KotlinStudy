@@ -3,7 +3,7 @@ package com.wd.kt.annotation
 import android.content.Intent
 import android.view.View
 import com.wd.kt.annotation.main.MainFragment
-import com.wd.kt.lib.base.common.ContainerActivity
+import com.wd.kt.lib.base.activity.ContainerActivity
 
 class MainActivity : ContainerActivity<MainFragment>() {
 

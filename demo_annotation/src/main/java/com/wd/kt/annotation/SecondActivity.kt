@@ -1,8 +1,7 @@
 package com.wd.kt.annotation
 
-import com.wd.kt.annotation.main.MainFragment
 import com.wd.kt.annotation.main.SecondFragment
-import com.wd.kt.lib.base.common.ContainerActivity
+import com.wd.kt.lib.base.activity.ContainerActivity
 
 class SecondActivity : ContainerActivity<SecondFragment>() {
 

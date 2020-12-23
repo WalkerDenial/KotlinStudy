@@ -1,8 +1,7 @@
-package com.wd.kt.lib.base.common
+package com.wd.kt.lib.base.activity
 
 import android.os.Bundle
 import com.wd.kt.lib.base.R
-import com.wd.kt.lib.base.activity.BaseActivity
 import com.wd.kt.lib.base.fragment.BaseFragment
 
 /**
