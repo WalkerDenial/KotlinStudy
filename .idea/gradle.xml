@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/demo_annotation" />
             <option value="$PROJECT_DIR$/demo_coroutine" />
             <option value="$PROJECT_DIR$/demo_generic" />
+            <option value="$PROJECT_DIR$/demo_thread" />
             <option value="$PROJECT_DIR$/lib_base" />
           </set>
         </option>
